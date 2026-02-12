@@ -1,0 +1,44 @@
+import pandas as pd
+
+
+
+df = pd.read_csv("day18_binning.csv")
+
+
+labels = ["ee", "qmr", "you", "ww"]
+
+
+df["age_rr"] = pd.cut(df["age"], bins = [0, 13, 30, 70, 100], labels=labels, right = False)
+df["age_rr"].value_counts()
+
+df["age_ar"] = pd.qcut(df["age"], q = 4 , labels = ["Q1","Q2","Q3","Q4"])
+print(df["age_rr"].value_counts())
+#------------------------------------------------------
+
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+import seaborn as sns
+from sklearn.preprocessing import OneHotEncoder
+
+# قراءة الملف
+df16 = pd.read_csv("day16_encoding.csv")
+
+# Label Encoding
+le_city = LabelEncoder()
+df16["city_label"] = le_city.fit_transform(df16["city"])
+print("Classes:", le_city.classes_)
+
+# One-Hot Encoding
+ohe = OneHotEncoder(sparse_output=True, handle_unknown="ignore")
+city_encoded = ohe.fit_transform(df16[["city"]])
+
+print(
+    "Encoded shape:", city_encoded.shape,
+    "Categories:", ohe.categories_
+)
+
+print("One-hot encode bins and compare")
+
+print("\nThe One-hot:\n", df16)
+
+print("\nThe encode bins:\n", df)
