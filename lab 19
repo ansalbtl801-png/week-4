@@ -1,0 +1,25 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import PowerTransformer
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+df19 = pd.read_csv("day19_transform.csv")
+
+
+u = np.log1p(df19["spend"])
+
+print(u)
+
+d= np.sqrt(df19["spend"])
+
+
+sns.histplot(df19["spend"])
+plt.show()
+
+sns.distplot(u)
+plt.show()
+
+sns.distplot(d)
+plt.show()
